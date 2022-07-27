@@ -55,6 +55,9 @@ jobs:
            username: ${{ secrets.USERNAME }}
            port: ${{ secrets.PORT }}
            script: |
+             ls
              cd /var/www/html/wongtani-frontend/
              ls
+             git checkout master
+             git push origin master
              whoami
