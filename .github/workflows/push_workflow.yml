@@ -13,16 +13,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 0.9
-#      - name: NPM Build
-#        run:          
-#          npm update
-#          npm run prod
-#      - name: Put built assets in Artifacts
-#        uses: actions/upload-artifact@v1
-#        with:
-#          name: assets
-#          path: public
-#          retention-days: 3
+      - name: NPM Build
+        run:          
+          npm update
+          npm run prod
+      - name: Put built assets in Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: assets
+          path: public
+          retention-days: 3
   deploy-production:
     name: Deploy Project to Production Server
     runs-on: ubuntu-latest
