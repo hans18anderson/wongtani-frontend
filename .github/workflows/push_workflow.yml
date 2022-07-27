@@ -1,0 +1,61 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-js-production:
+    name: Build JavaScript/CSS for Production Server
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 0.9
+      - name: NPM Build
+        run:          
+          npm update
+          npm run prod
+      - name: Put built assets in Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: assets
+          path: public
+          retention-days: 3
+  deploy-production:
+    name: Deploy Project to Production Server
+    runs-on: ubuntu-latest
+    needs: [ build-js-production ]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v1
+      - name: Fetch built assets from Artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: assets
+          path: public
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: '7.3'
+          extension-csv: mbstring, bcmath
+      - name: Composer install
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Setup Deployer
+        uses: atymic/deployer-php-action@master
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+           host: "103.19.208.16"
+           key: ${{ secrets.SSH_PRIVATE_KEY }}
+           username: "root"
+           port: "22"
+           script: |
+             cd /var/www/html/wongtani-frontend-admin/
+             git pull origin master
+             ls
+             whoami
