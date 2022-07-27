@@ -56,6 +56,5 @@ jobs:
            port: ${{ secrets.PORT }}
            script: |
              cd /var/www/html/wongtani-frontend/
-             git pull origin master
              ls
              whoami
