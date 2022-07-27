@@ -4,15 +4,15 @@ on:
       - master
 
 jobs:
-#  build-js-production:
-#    name: Build JavaScript/CSS for Production Server
-#    runs-on: ubuntu-latest
-#    if: github.ref == 'refs/heads/master'
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: actions/setup-node@v3
-#        with:
-#          node-version: 0.9
+  build-js-production:
+    name: Build JavaScript/CSS for Production Server
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 0.9
 #      - name: NPM Build
 #        run:          
 #          npm update
