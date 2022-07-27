@@ -66,7 +66,9 @@ jobs:
 #             composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 #             php artisan migrate
   sonarCloud:
+    name: Sonar Cloud Scanner
     runs-on: ubuntu-latest
+    needs: [ deploy-production ]
     steps:
     - uses: actions/checkout@v2
       with:
