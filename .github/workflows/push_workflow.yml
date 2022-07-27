@@ -50,10 +50,10 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
-           host: "103.19.208.16"
-           key: ${{ secrets.SSH_PRIVATE_KEY }}
-           username: "root"
-           port: "22"
+           host: ${{ secrets.HOST }}
+           key: ${{ secrets.SSH_KEY }}
+           username: ${{ secrets.USERNAME }}
+           port: ${{ secrets.PORT }}
            script: |
              cd /var/www/html/wongtani-frontend-admin/
              git pull origin master
