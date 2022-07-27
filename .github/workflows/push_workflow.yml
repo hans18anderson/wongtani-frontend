@@ -57,6 +57,7 @@ jobs:
            script: |
              cd /var/www/html/wongtani-frontend
              git status
+             git pull origin master
 #             cd /var/www/html/wongtani-frontend/
 #             ls
 #             git pull origin master
