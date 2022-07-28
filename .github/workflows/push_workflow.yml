@@ -49,24 +49,6 @@ jobs:
     needs: [ build-js-production ]
     if: github.ref == 'refs/heads/master'
     steps:
-#      - uses: actions/checkout@v1
-#      - name: Fetch built assets from Artifacts
-#        uses: actions/download-artifact@v1
-#        with:
-#          name: assets
-#          path: public
-#      - name: Setup PHP
-#        uses: shivammathur/setup-php@master
-#        with:
-#          php-version: '7.3'
-#          extension-csv: mbstring, bcmath
-#      - name: Composer install
-#        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-#      - name: Setup Deployer
-#        uses: atymic/deployer-php-action@master
-#        with:
-#          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -78,11 +60,7 @@ jobs:
              cd /var/www/html/wongtani-frontend
              git status
              git pull origin master
-#             cd /var/www/html/wongtani-frontend/
-#             ls
-#             git pull origin master
-#             composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-#             php artisan migrate
+
   sonarCloud:
     name: Sonar Cloud Scanner
     runs-on: ubuntu-latest
@@ -97,18 +75,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#    - name: Analyze with SonarCloud
-#      uses: sonarsource/sonarcloud-github-action@master
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#      with:
-#        projectBaseDir: /home
-#        args: >
-#          -Dsonar.organization=hans18anderson
-#          -Dsonar.projectKey=hans18anderson_wongtani-frontend
-#          -Dsonar.python.coverage.reportPaths=coverage.xml
-#          -Dsonar.sources=lib/
-#          -Dsonar.test.exclusions=tests/**
-#          -Dsonar.tests=tests/
-#          -Dsonar.verbose=true
