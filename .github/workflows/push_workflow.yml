@@ -75,9 +75,7 @@ jobs:
            username: ${{ secrets.USERNAME }}
            port: ${{ secrets.PORT }}
            script: |
-             ls -a
              cd /var/www/html/wongtani-frontend
-             ls -a
              git status
              git pull origin master
 #             cd /var/www/html/wongtani-frontend/
