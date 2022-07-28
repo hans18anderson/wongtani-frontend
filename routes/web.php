@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('auth.log')
-})
+    return view('auth.log');
+});
 
 use Illuminate\Support\Facades\Route; 
  
