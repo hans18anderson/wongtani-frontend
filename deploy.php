@@ -19,8 +19,6 @@ set('rsync_src', function(){
 add('rsync',[
 	'exclude'=> [
 	'.git',
-	'/vendor/',
-	'/node_modules/',
 	'.github',
 	'deploy.php',
 	],
@@ -47,15 +45,15 @@ after('deploy:failed','deploy:unlock');
 desc('Start of Deploy the application');
 
 task('deploy',[
-        'deploy:info',
+    'deploy:info',
 	'deploy:prepare',
-        'deploy:lock',
-        'deploy:release',
+	'deploy:lock',
+    'deploy:release',
 	'rsync',
 	'deploy:secrets',
 	'deploy:vendors',
 	'deploy:shared',
-        'deploy:writable',
+    'deploy:writable',
 	'artisan:storage:link',
 	'artisan:view:cache',
 	'artisan:config:cache',
