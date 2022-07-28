@@ -21,7 +21,7 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: vendor/bin/phpunit
-
+  #Build Production
   build-js-production:
     name: Build JavaScript/CSS for Production Server
     runs-on: ubuntu-latest
