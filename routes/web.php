@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/welcome', function () {
-    return view('auth.log');
-});
+Route::get('/', function () {
+    return view('auth.log')
+})
 
 use Illuminate\Support\Facades\Route; 
  
