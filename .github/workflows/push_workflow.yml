@@ -21,7 +21,6 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: vendor/bin/phpunit
-  #Build Production
   build-js-production:
     name: Build JavaScript/CSS for Production Server
     runs-on: ubuntu-latest
@@ -49,6 +48,13 @@ jobs:
     needs: [ build-js-production ]
     if: github.ref == 'refs/heads/master'
     steps:
+      - name: Fetch built assets from Artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: assets
+          path: public
+      - name: Composer install
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
