@@ -53,8 +53,6 @@ jobs:
         with:
           name: assets
           path: public
-      - name: Composer install
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
