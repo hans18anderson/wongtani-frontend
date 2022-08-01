@@ -19,8 +19,7 @@ set('rsync_src', function(){
 add('rsync',[
 	'exclude'=> [
 	'.git',
-	'.github',
-	'deploy.php',
+	'.github'
 	],
 ]);
 
@@ -28,11 +27,6 @@ task('deploy:secrets',function(){
 	file_put_content(__DIR__.'./env',getenv('DOT_ENV'));
 	upload('.env',get('deploy_path').'/shared');
 });
-
-// [Optional] Allocate tty for git clone. Default value is false.
-// set('git_tty', true); 
-
-// Host
 
 host('103.19.208.16')
     ->setRemoteUser('deployer')//SSH user
